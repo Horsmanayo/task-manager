@@ -15,7 +15,7 @@ const TaskCard = ({
     <div className="p-4 border rounded-md shadow-sm bg-white h-auto space-y-8">
       {/* image */}
       <div>
-        <img src={taskImage} alt="Task Image" className="w-[100vw] h-[30vh]" />
+        <img src={taskImage} alt="Task Image" className="w-[300px] h-[30vh]" />
       </div>
 
       {/* content */}
@@ -24,7 +24,7 @@ const TaskCard = ({
         <span className="text-sm">Progress: {progress}%</span>
         <span className="text-sm text-gray-500">{deadline}</span>
       </div>
-      
+
       {/* progress bar */}
       <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
         <div
