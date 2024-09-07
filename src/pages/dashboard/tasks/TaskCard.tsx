@@ -12,7 +12,7 @@ const TaskCard = ({
   deadline,
 }: TaskCardProps) => {
   return (
-    <div className="p-4 border rounded-md shadow-sm bg-white h-auto space-y-8">
+    <div className="p-4 border rounded-md shadow-sm bg-white h-auto space-y-8 w-[320px]">
       {/* image */}
       <div>
         <img src={taskImage} alt="Task Image" className="w-[300px] h-[30vh]" />

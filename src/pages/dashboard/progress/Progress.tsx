@@ -4,7 +4,7 @@ import SummaryCard from "./SummaryCard";
 
 const Progress = () => {
   return (
-    <div className="flex gap-10">
+    <div className="flex gap-6">
       <div className="">
         <ProgressChart />
       </div>

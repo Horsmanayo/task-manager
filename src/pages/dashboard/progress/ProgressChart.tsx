@@ -40,7 +40,7 @@ function ProgressChart() {
   };
 
   return (
-    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-[300px]">
+    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-[320px]">
       {/* Title */}
       <h2 className="text-xl font-semibold text-white">Task Completion Rate</h2>
 
