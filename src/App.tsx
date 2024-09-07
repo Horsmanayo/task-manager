@@ -10,7 +10,7 @@ function App() {
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/dashboard" element={<LazyDashboard />} />
+        <Route path="/dashboard/*" element={<LazyDashboard />} />
 
         {/* Auth route declaration below */}
         <Route path="/auth/*" element={<LazyAuth />} />
