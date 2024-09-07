@@ -24,7 +24,7 @@ const Sidebar = () => {
             <span className="text-white text-3xl bg-blue-600 p-2 border rounded-lg">
               <FiBookOpen />
             </span>
-            <h1 className="text-black-600 text-4xl">Nuegas</h1>
+            <h1 className="text-black-600 text-4xl">SGT</h1>
           </div>
         </div>
 

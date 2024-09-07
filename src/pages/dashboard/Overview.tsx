@@ -1,10 +1,12 @@
+import Progress from "./progress/Progress";
 import Tasks from "./tasks/Tasks";
 
 const Overview = () => {
   return (
-<div className="container">
-  <div></div>
-  <Tasks />
+<div className="m-8">
+  <div className="mb-20"><Progress /></div>
+  <div className=""><Tasks /></div>
+  
 </div>
   )
 };
