@@ -7,7 +7,7 @@ import {
   deleteProject,
 } from "../../redux/projectSlice";
 
-const ProjectManagementScreen: React.FC = () => {
+const Management: React.FC = () => {
   const projects = useSelector((state: RootState) => state.projects.projects);
   const dispatch = useDispatch();
   const [newProject, setNewProject] = useState({
@@ -96,4 +96,4 @@ const ProjectManagementScreen: React.FC = () => {
   );
 };
 
-export default ProjectManagementScreen;
+export default Management;
