@@ -60,7 +60,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
-              to="/mentors"
+              to="/dashboard/management"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${
                   isActive
@@ -70,7 +70,7 @@ const Sidebar = () => {
               }
             >
               <FiUsers className="text-lg" />
-              <span>Mentors</span>
+              <span>Management</span>
             </NavLink>
 
             <NavLink
