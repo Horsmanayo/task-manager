@@ -27,18 +27,20 @@ const Dashboard = () => {
         {/* // Render Sidebar component */}
         <Sidebar />
         {/* // Define routes for the app */}
-        <Routes>
-          {/* // Route for Overview component */}
-          <Route path="/" element={<Overview />} />
-          <Route path="/overview" element={<Overview />} />
-          <Route path="/tasks" element={<TaskList />} />
-          {/* // Route for Management component */}
-          <Route path="/management/*" element={<Management />} />
-          {/* // Route for AddProject component */}
-          <Route path="/management/add-project" element={<AddProject />} />
-          <Route path="/notification" element={<NotificationComponent />} />
-          <Route path="/team-members" element={<TeamMembersScreen />} />
-        </Routes>
+        <div className="w-[calc(100%-256px)]">
+          <Routes>
+            {/* // Route for Overview component */}
+            <Route path="/" element={<Overview />} />
+            <Route path="/overview" element={<Overview />} />
+            <Route path="/tasks" element={<TaskList />} />
+            {/* // Route for Management component */}
+            <Route path="/management/*" element={<Management />} />
+            {/* // Route for AddProject component */}
+            <Route path="/management/add-project" element={<AddProject />} />
+            <Route path="/notification" element={<NotificationComponent />} />
+            <Route path="/team-members" element={<TeamMembersScreen />} />
+          </Routes>
+        </div>
       </div>
     </ProjectProvider>
   );
