@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import NotificationComponent from "../../component/Notification";
-const Dashboard = () => {
-  return (
-    <>
-      <NotificationComponent />
-    </>
-=======
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "../../component/Sidebar";
 import Overview from "./Overview";
 import Management from "../management/Management";
+import NotificationComponent from "../../component/Notification";
 
 const Dashboard = () => {
   return (
@@ -19,9 +12,9 @@ const Dashboard = () => {
         <Route path="/" element={<Overview />} />
         <Route path="/overview" element={<Overview />} />
         <Route path="/management" element={<Management />} />
+        <Route path="/notification" element={<NotificationComponent />} />
       </Routes>
     </div>
->>>>>>> b8a0aa261cdd39851937f7cf0fb624aeb80dab5f
   );
 };
 
