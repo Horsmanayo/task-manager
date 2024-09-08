@@ -20,7 +20,7 @@ const Dashboard = () => {
   return (
     // Wrap the app with ProjectProvider to provide project context
     <ProjectProvider>
-      <div className="flex">
+      <div className="     flex">
         {/* // Render Sidebar component */}
         <Sidebar />
         {/* // Define routes for the app */}
