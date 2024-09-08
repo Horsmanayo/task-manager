@@ -1,5 +1,10 @@
+import NotificationComponent from "../../component/Notification";
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <NotificationComponent />
+    </>
+  );
 };
 
 export default Dashboard;
