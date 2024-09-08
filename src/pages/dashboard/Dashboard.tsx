@@ -1,72 +1,40 @@
+// Import necessary dependencies from react-router-dom
 import { Route, Routes } from "react-router-dom";
+
+// Import Sidebar component
 import Sidebar from "../../component/Sidebar";
+
+// Import Overview component
 import Overview from "./Overview";
+
+// Import Management component
 import Management from "../management/Management";
-import AddProject from "../management/AddProject"; // Import AddProject component
-import { useState } from "react";
-import { projectData } from "../../utils/projectData"; // Assuming initial project data is here
+
+// Import AddProject component
+import AddProject from "../management/AddProject";
+
+// Import ProjectProvider from ProjectContext
+import { ProjectProvider } from "../../context/ProjectContext";
 
 const Dashboard = () => {
-  // State to manage projects
-  const [projects, setProjects] = useState(projectData);
-
-  // Function to handle adding a new project
-  const addProject = (project: {
-    id: number;
-    name: string;
-    status: string;
-    priority: string;
-    description: string;
-    duedate: string;
-  }) => {
-    setProjects((prevProjects) => [...prevProjects, project]);
-  };
-
-  // Function to handle updating a project
-  const updateProject = (updatedProject: {
-    id: number;
-    name: string;
-    status: string;
-    priority: string;
-    description: string;
-    duedate: string;
-  }) => {
-    setProjects((prevProjects) =>
-      prevProjects.map((project) =>
-        project.id === updatedProject.id ? updatedProject : project
-      )
-    );
-  };
-
-  // Function to handle deleting a project
-  const deleteProject = (id: number) => {
-    setProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== id)
-    );
-  };
-
   return (
-    <div className="flex">
-      <Sidebar />
-      <Routes>
-        <Route path="/" element={<Overview />} />
-        <Route path="/overview" element={<Overview />} />
-        <Route
-          path="/management"
-          element={
-            <Management
-              projects={projects}
-              onUpdateProject={updateProject}
-              onDeleteProject={deleteProject}
-            />
-          }
-        />
-        <Route
-          path="/management/add-project"
-          element={<AddProject addProject={addProject} />}
-        />
-      </Routes>
-    </div>
+    // Wrap the app with ProjectProvider to provide project context
+    <ProjectProvider>
+      <div className="flex">
+        {/* // Render Sidebar component */}
+        <Sidebar />
+        {/* // Define routes for the app */}
+        <Routes>
+          {/* // Route for Overview component */}
+          <Route path="/" element={<Overview />} />
+          <Route path="/overview" element={<Overview />} />
+          {/* // Route for Management component */}
+          <Route path="/management/*" element={<Management />} />
+          {/* // Route for AddProject component */}
+          <Route path="/management/add-project" element={<AddProject />} />
+        </Routes>
+      </div>
+    </ProjectProvider>
   );
 };
 
