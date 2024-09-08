@@ -18,6 +18,7 @@ import AddProject from "../management/AddProject";
 // Import ProjectProvider from ProjectContext
 import { ProjectProvider } from "../../context/ProjectContext";
 import TaskList from "../list/Tasklist";
+import Settings from "../settings/Settings";
 
 const Dashboard = () => {
   return (
@@ -39,6 +40,7 @@ const Dashboard = () => {
             <Route path="/management/add-project" element={<AddProject />} />
             <Route path="/notification" element={<NotificationComponent />} />
             <Route path="/team-members" element={<TeamMembersScreen />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>

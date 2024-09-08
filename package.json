@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.7",
     "chart.js": "^4.4.4",
+    "dashboard": "file:",
     "formik": "^2.4.6",
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
@@ -23,6 +24,7 @@
     "react-router-dom": "^6.26.1",
     "react-spinners": "^0.14.1",
     "react-toastify": "^10.0.5",
+    "styled-components": "^6.1.13",
     "yup": "^1.4.0"
   },
   "devDependencies": {
