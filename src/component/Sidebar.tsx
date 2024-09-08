@@ -74,7 +74,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
-              to="/message"
+              to="/dashboard/notification"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${
                   isActive
@@ -84,7 +84,7 @@ const Sidebar = () => {
               }
             >
               <FiMessageCircle className="text-lg" />
-              <span>Message</span>
+              <span>Notification</span>
             </NavLink>
 
             <NavLink
