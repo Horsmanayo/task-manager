@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { notifications as mockNotifications } from "../utils/notificationData";
+import { notifications as mockNotifications } from "../../utils/notificationData";
 
 // Define the notification interface to specify the structure
 interface Notification {
-  id: string;
+  id: number;
   message: string;
   isRead: boolean;
   timestamp: string;
@@ -14,7 +14,7 @@ const NotificationComponent = () => {
     useState<Notification[]>(mockNotifications);
 
   // Toggle read and unread state with typed notification
-  const toggleReadStatus = (id: string) => {
+  const toggleReadStatus = (id: number) => {
     const updateNotifications = notifications.map(
       (notification: Notification) => {
         if (notification.id === id) {
@@ -27,7 +27,7 @@ const NotificationComponent = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-md">
+    <div className="w-full p-6 max-w-4xl mx-auto bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Notifications</h2>
       <ul className="space-y-3">
         {notifications.map((notification: Notification) => (

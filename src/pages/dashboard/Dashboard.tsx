@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Sidebar from "../../component/Sidebar";
 import Overview from "./Overview";
 import Management from "../management/Management";
-import NotificationComponent from "../../component/Notification";
+import NotificationComponent from "../notification/Notification";
 
 const Dashboard = () => {
   return (
