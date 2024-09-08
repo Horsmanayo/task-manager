@@ -10,11 +10,11 @@ function App() {
     <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/dashboard" element={<LazyDashboard />} />
-
+        <Route path="/dashboard/*" element={<LazyDashboard />} />
         {/* Auth route declaration below */}
         <Route path="/auth/*" element={<LazyAuth />} />
 
+        {/* New Route */}
         {/* default route */}
         <Route path="*" element={<div>404: Not Found</div>} />
       </Routes>
