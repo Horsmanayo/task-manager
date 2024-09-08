@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom"; // Import routing components from react-router-dom
 import { lazy, Suspense } from "react"; // Import lazy loading and Suspense for dynamically loading components
-import Loader from "./component/Loader"; // Import a loader component to show while waiting for lazy-loaded components
+import Loader from "./components/Loader"; // Import a loader component to show while waiting for lazy-loaded components
 
 // Lazy load the Auth and Dashboard components to improve performance by splitting code
-const LazyAuth = lazy(() => import("./pages/auth/Auth")); 
+const LazyAuth = lazy(() => import("./pages/auth/Auth"));
 const LazyDashboard = lazy(() => import("./pages/dashboard/Dashboard"));
 
 function App() {

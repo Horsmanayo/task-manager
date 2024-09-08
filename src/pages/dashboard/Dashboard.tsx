@@ -2,7 +2,7 @@
 import { Route, Routes } from "react-router-dom";
 
 // Import Sidebar component
-import Sidebar from "../../component/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 // Import Overview component
 import Overview from "./Overview";
@@ -10,13 +10,14 @@ import Overview from "./Overview";
 // Import Management component
 import Management from "../management/Management";
 import NotificationComponent from "../notification/Notification";
-import TeamMembersScreen from "../../component/TeamMembersScreen";
+import TeamMembersScreen from "../../components/TeamMembersScreen";
 
 // Import AddProject component
 import AddProject from "../management/AddProject";
 
 // Import ProjectProvider from ProjectContext
 import { ProjectProvider } from "../../context/ProjectContext";
+import TaskList from "../list/Tasklist";
 
 const Dashboard = () => {
   return (
@@ -30,6 +31,7 @@ const Dashboard = () => {
           {/* // Route for Overview component */}
           <Route path="/" element={<Overview />} />
           <Route path="/overview" element={<Overview />} />
+          <Route path="/tasks" element={<TaskList />} />
           {/* // Route for Management component */}
           <Route path="/management/*" element={<Management />} />
           {/* // Route for AddProject component */}

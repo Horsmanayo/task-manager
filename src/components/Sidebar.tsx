@@ -46,7 +46,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
-              to="/tasks"
+              to="/dashboard/tasks"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${
                   isActive
