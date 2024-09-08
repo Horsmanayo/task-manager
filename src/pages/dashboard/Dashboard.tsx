@@ -9,6 +9,8 @@ import Overview from "./Overview";
 
 // Import Management component
 import Management from "../management/Management";
+import NotificationComponent from "../notification/Notification";
+import TeamMembersScreen from "../../component/TeamMembersScreen";
 
 // Import AddProject component
 import AddProject from "../management/AddProject";
@@ -20,7 +22,7 @@ const Dashboard = () => {
   return (
     // Wrap the app with ProjectProvider to provide project context
     <ProjectProvider>
-      <div className="     flex">
+      <div className="flex">
         {/* // Render Sidebar component */}
         <Sidebar />
         {/* // Define routes for the app */}
@@ -32,6 +34,8 @@ const Dashboard = () => {
           <Route path="/management/*" element={<Management />} />
           {/* // Route for AddProject component */}
           <Route path="/management/add-project" element={<AddProject />} />
+          <Route path="/notification" element={<NotificationComponent />} />
+          <Route path="/team-members" element={<TeamMembersScreen />} />
         </Routes>
       </div>
     </ProjectProvider>

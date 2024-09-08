@@ -7,8 +7,8 @@ import {
   FiMessageCircle,
   FiSettings,
   FiHelpCircle,
+  FiActivity,
 } from "react-icons/fi";
-// import authImage from "../../assets/images/overview.svg";
 
 const Sidebar = () => {
   return (
@@ -69,12 +69,26 @@ const Sidebar = () => {
                 }`
               }
             >
-              <FiUsers className="text-lg" />
+              <FiActivity className="text-lg" />
               <span>Management</span>
             </NavLink>
 
             <NavLink
-              to="/message"
+              to="/dashboard/team-members"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 p-2 rounded-md ${
+                  isActive
+                    ? "text-blue-600 bg-gray-200"
+                    : "text-gray-700 hover:bg-gray-200"
+                }`
+              }
+            >
+              <FiUsers className="text-lg" />
+              <span>Team Members</span>
+            </NavLink>
+
+            <NavLink
+              to="/dashboard/notification"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${
                   isActive
@@ -84,7 +98,7 @@ const Sidebar = () => {
               }
             >
               <FiMessageCircle className="text-lg" />
-              <span>Message</span>
+              <span>Notification</span>
             </NavLink>
 
             <NavLink
