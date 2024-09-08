@@ -3,6 +3,7 @@ import Sidebar from "../../component/Sidebar";
 import Overview from "./Overview";
 import Management from "../management/Management";
 import NotificationComponent from "../notification/Notification";
+import TeamMembersScreen from "../../component/TeamMembersScreen";
 
 const Dashboard = () => {
   return (
@@ -13,6 +14,7 @@ const Dashboard = () => {
         <Route path="/overview" element={<Overview />} />
         <Route path="/management" element={<Management />} />
         <Route path="/notification" element={<NotificationComponent />} />
+        <Route path="/team-members" element={<TeamMembersScreen />} />
       </Routes>
     </div>
   );
