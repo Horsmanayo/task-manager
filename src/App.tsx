@@ -13,8 +13,6 @@ function App() {
         <Route path="/dashboard/*" element={<LazyDashboard />} />
         {/* Auth route declaration below */}
         <Route path="/auth/*" element={<LazyAuth />} />
-
-        {/* New Route */}
         {/* default route */}
         <Route path="*" element={<div>404: Not Found</div>} />
       </Routes>

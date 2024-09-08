@@ -1,55 +1,70 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../redux/store";
-import {
-  addProject,
-  editProject,
-  deleteProject,
-} from "../../redux/projectSlice";
+import { useNavigate } from "react-router-dom";
 
-const Management: React.FC = () => {
-  const projects = useSelector((state: RootState) => state.projects.projects);
-  const dispatch = useDispatch();
-  const [newProject, setNewProject] = useState({
-    id: 0,
-    name: "",
-    description: "",
-    status: "Active",
-  });
+interface Project {
+  id: number;
+  name: string;
+  status: string;
+  priority: string;
+  description: string;
+  duedate: string;
+}
 
-  const handleAdd = () => {
-    dispatch(addProject({ ...newProject, id: projects.length + 1 }));
-    setNewProject({ id: 0, name: "", description: "", status: "Active" });
+interface ManagementProps {
+  projects: Project[];
+  onUpdateProject: (updatedProject: Project) => void; // Callback to handle project update
+  onDeleteProject: (id: number) => void; // Callback to handle project deletion
+}
+
+const Management: React.FC<ManagementProps> = ({ projects, onUpdateProject, onDeleteProject }) => {
+  const navigate = useNavigate();
+
+  // Function to handle editing a project
+  const handleEdit = (id: number) => {
+    const project = projects.find(p => p.id === id);
+    if (project) {
+      const updatedName = prompt("Edit project name:", project.name);
+      const updatedDescription = prompt("Edit project description:", project.description);
+      if (updatedName && updatedDescription) {
+        const updatedProject = { ...project, name: updatedName, description: updatedDescription };
+        onUpdateProject(updatedProject);
+      }
+    }
   };
 
-  const handleEdit = (project: any) => {
-    const updatedProject = {
-      ...project,
-      name: prompt("Edit project name", project.name) || project.name,
-    };
-    dispatch(editProject(updatedProject));
-  };
-
+  // Function to handle deleting a project
   const handleDelete = (id: number) => {
-    dispatch(deleteProject(id));
+    if (window.confirm("Are you sure you want to delete this project?")) {
+      onDeleteProject(id);
+    }
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h2 className="text-3xl font-bold mb-4">Project Management</h2>
-      <ul className="space-y-4">
+      <h2 className="text-3xl font-bold mb-6">Task Management</h2>
+
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded mb-6"
+        onClick={() => navigate("/dashboard/management/add-project")}
+      >
+        Add New Project
+      </button>
+
+      <div className="grid grid-cols-1fr-3fr gap-6">
         {projects.map((project) => (
-          <li
+          <div
             key={project.id}
-            className="bg-white p-4 shadow-md flex justify-between items-center"
+            className="bg-white p-4 shadow-md flex flex-col justify-between rounded-lg"
           >
-            <div>
-              <strong className="text-lg">{project.name}</strong> -{" "}
-              {project.description} [{project.status}]
+            <div className="flex flex-col">
+              <strong className="text-lg mb-2">{project.name}</strong>
+              <p className="mb-2">{project.description}</p>
+              <p>
+                Status: {project.status} | Priority: {project.priority} | Due: {project.duedate}
+              </p>
             </div>
-            <div className="space-x-2">
+            <div className="flex justify-end space-x-2 mt-4">
               <button
-                onClick={() => handleEdit(project)}
+                onClick={() => handleEdit(project.id)}
                 className="bg-blue-500 text-white px-2 py-1 rounded"
               >
                 Edit
@@ -61,36 +76,8 @@ const Management: React.FC = () => {
                 Delete
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
-
-      <div className="mt-6">
-        <h3 className="text-2xl font-bold mb-2">Add New Project</h3>
-        <input
-          type="text"
-          placeholder="Project name"
-          value={newProject.name}
-          onChange={(e) =>
-            setNewProject({ ...newProject, name: e.target.value })
-          }
-          className="border p-2 mr-2"
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newProject.description}
-          onChange={(e) =>
-            setNewProject({ ...newProject, description: e.target.value })
-          }
-          className="border p-2 mr-2"
-        />
-        <button
-          onClick={handleAdd}
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
-          Add Project
-        </button>
       </div>
     </div>
   );
