@@ -12,9 +12,9 @@ const Dashboard = () => {
       <Routes>
         <Route path="/" element={<Overview />} />
         <Route path="/overview" element={<Overview />} />
-        <Route path="header" element={<Header />} />
-        <Route path="previewtask" element={<PreviewTask />} />
-        <Route path="tasks" element={<Tasks />} />
+        <Route path="/header" element={<Header />} />
+        <Route path="/previewtask" element={<PreviewTask />} />
+        <Route path="/tasks" element={<Tasks />} />
       </Routes>
     </div>
   );
