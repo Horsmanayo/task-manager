@@ -40,7 +40,7 @@ const Sidebar = () => {
           </Link>
 
           <Link
-            to="/tasks"
+            to="/dashboard/tasks"
             className="flex items-center space-x-2 text-gray-700 hover:bg-gray-200 p-2 rounded-md"
           >
             <FiBook className="text-lg" />
