@@ -19,6 +19,7 @@ import AddProject from "../management/AddProject";
 import { ProjectProvider } from "../../context/ProjectContext";
 import TaskList from "../list/Tasklist";
 import PreviewPage from "../previewpage/PreviewPage";
+import Chat from "../chat/Chat";
 
 const Dashboard = () => {
   return (
@@ -41,6 +42,7 @@ const Dashboard = () => {
             <Route path="/management/add-project" element={<AddProject />} />
             <Route path="/notification" element={<NotificationComponent />} />
             <Route path="/team-members" element={<TeamMembersScreen />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
         </div>
       </div>
