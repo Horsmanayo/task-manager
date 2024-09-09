@@ -1,5 +1,3 @@
-// All the components of TaskDetail are rendered if they are available
-
 interface TaskDetailProps {
   image?: string;
   taskName?: string;
@@ -22,17 +20,16 @@ const TaskDetail = ({
   steps,
 }: TaskDetailProps) => {
   return (
-    <div className="ml-8 p-4 border rounded-md shadow-lg bg-white w-[400px] h-[650px]">
-      {/* Task Image */}
+    <div className="p-4 border rounded-md shadow-lg bg-white w-full  max-w-4xl mx-auto">
       {image && (
         <img
           src={image}
           alt={taskName}
-          className="w-full h-40 object-cover mb-4 rounded-md"
+          className="w-full h-48 object-cover mb-4 rounded-md"
         />
       )}
 
-      <h3 className="text-xl font-semibold mb-4">{taskName}</h3>
+      <h3 className="text-2xl md:text-3xl font-semibold mb-4">{taskName}</h3>
 
       <p className="text-sm text-gray-500 mb-2">Deadline: {deadline}</p>
 
@@ -45,17 +42,15 @@ const TaskDetail = ({
         ></div>
       </div>
 
-      {/* Task Description */}
       {description && (
         <p className="text-gray-700 mb-4">
           <strong>Description:</strong> {description}
         </p>
       )}
 
-      {/* Display Steps */}
       {steps && steps.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-lg font-semibold mb-2">Steps:</h4>
+          <h4 className="text-lg md:text-xl font-semibold mb-2">Steps:</h4>
           <ol className="list-decimal list-inside text-gray-700">
             {steps.map((step: string, index: number) => (
               <li key={index} className="mb-1">
@@ -66,18 +61,15 @@ const TaskDetail = ({
         </div>
       )}
 
-      {/* Instructor Details */}
       {instructorImage && instructorName && (
         <div className="flex items-center mt-6">
-          {/* Instructor Image */}
           <img
             src={instructorImage}
             alt={instructorName}
-            className="w-16 h-16 rounded-full mr-4 object-cover border border-gray-300"
+            className="w-12 h-12 md:w-16 md:h-16 rounded-full mr-4 object-cover border border-gray-300"
           />
-          {/* Instructor Name */}
           <div>
-            <p className="text-sm font-semibold">{instructorName}</p>
+            <p className="text-sm md:text-base font-semibold">{instructorName}</p>
             <p className="text-sm text-gray-500">Instructor</p>
           </div>
         </div>
