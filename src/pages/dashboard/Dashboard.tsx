@@ -18,6 +18,7 @@ import AddProject from "../management/AddProject";
 // Import ProjectProvider from ProjectContext
 import { ProjectProvider } from "../../context/ProjectContext";
 import TaskList from "../list/Tasklist";
+import PreviewPage from "../previewpage/PreviewPage";
 
 const Dashboard = () => {
   return (
@@ -33,6 +34,7 @@ const Dashboard = () => {
             <Route path="/" element={<Overview />} />
             <Route path="/overview" element={<Overview />} />
             <Route path="/tasks" element={<TaskList />} />
+            <Route path="/tasks/:id" element={<PreviewPage />} />
             {/* // Route for Management component */}
             <Route path="/management/*" element={<Management />} />
             {/* // Route for AddProject component */}
