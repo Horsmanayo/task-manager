@@ -1,6 +1,6 @@
 const Tasks = () => {
   return (
-    <div className="bg-white">
+    <div className="">
       <div>
         <h1 className="font-bold">Assigned Assignments</h1>
         <h1 className="font-semibold text-xl">Creating Awesome Mobile Apps</h1>

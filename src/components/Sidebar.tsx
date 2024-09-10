@@ -96,6 +96,20 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
+              to="/dashboard/settings"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 p-2 rounded-md ${
+                  isActive
+                    ? "text-blue-600 bg-gray-200"
+                    : "text-gray-700 hover:bg-gray-200"
+                }`
+              }
+            >
+              <FiBook className="text-lg" />
+              <span>Settings</span>
+            </NavLink>
+
+            <NavLink
               to="/dashboard/team-members"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${

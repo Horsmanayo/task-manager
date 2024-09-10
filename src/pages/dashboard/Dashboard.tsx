@@ -20,6 +20,7 @@ import { ProjectProvider } from "../../context/ProjectContext";
 import TaskList from "../list/Tasklist";
 import PreviewPage from "../previewpage/PreviewPage";
 import Chat from "../chat/Chat";
+import Settings from "../settings/Settings";
 
 const Dashboard = () => {
   return (
@@ -43,6 +44,7 @@ const Dashboard = () => {
             <Route path="/notification" element={<NotificationComponent />} />
             <Route path="/team-members" element={<TeamMembersScreen />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </div>
