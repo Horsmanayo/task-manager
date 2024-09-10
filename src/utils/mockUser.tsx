@@ -1,5 +1,5 @@
-export const mockUser = {
-  username: "JohnDoe",
-  email: "john.doe@example.com",
-  avatar: "", // To be updated by the user
+export const userData = {
+  username: "john_doe",
+  email: "john@example.com",
+  avatar: "https://via.placeholder.com/150",
 };

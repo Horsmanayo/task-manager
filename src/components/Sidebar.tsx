@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { IoChatbubbleOutline } from "react-icons/io5";
+
 import {
   FiBookOpen,
   FiGrid,
@@ -127,6 +129,19 @@ const Sidebar = () => {
             >
               <FiSettings className="text-lg" />
               <span>Settings</span>
+            </NavLink>
+            <NavLink
+              to="/dashboard/chat"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 p-2 rounded-md ${
+                  isActive
+                    ? "text-blue-600 bg-gray-200"
+                    : "text-gray-700 hover:bg-gray-200"
+                }`
+              }
+            >
+              <IoChatbubbleOutline className="text-lg" />
+              <span>chat</span>
             </NavLink>
           </nav>
         </div>

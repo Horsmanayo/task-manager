@@ -1,96 +1,103 @@
-// src/components/UserProfile.tsx
 import React, { useState } from "react";
-import styled from "styled-components";
-import { mockUser } from "../../utils/mockUser";
-
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-`;
-
-const Avatar = styled.img`
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 20px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`;
-
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
+import { userData } from "../../utils/mockUser";
+import { User } from "../../types/User";
 
 const Settings: React.FC = () => {
-  const [user, setUser] = useState(mockUser);
-  const [avatarPreview, setAvatarPreview] = useState(user.avatar);
+  // Define state for user and form data
+  const [user, setUser] = useState<User>(userData);
+  const [formData, setFormData] = useState({
+    username: user.username,
+    email: user.email,
+    avatar: null as string | null,
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+  // Handle input field changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
+  // Handle avatar change
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatarPreview(reader.result as string);
-        setUser({ ...user, avatar: reader.result as string });
-      };
-      reader.readAsDataURL(file);
+    if (e.target.files && e.target.files[0]) {
+      setFormData({
+        ...formData,
+        avatar: URL.createObjectURL(e.target.files[0]),
+      });
     }
   };
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("User updated successfully!");
-    console.log("Updated User:", user);
+    setUser({
+      ...user,
+      username: formData.username,
+      email: formData.email,
+      avatar: formData.avatar || user.avatar,
+    });
   };
 
   return (
-    <ProfileContainer>
-      <Avatar
-        src={avatarPreview || "https://via.placeholder.com/150"}
-        alt="User Avatar"
-      />
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          name="username"
-          value={user.username}
-          onChange={handleInputChange}
-          placeholder="Username"
+    <div className="max-w-lg mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">User Profile</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2">Username</label>
+          <input
+            type="text"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2">Avatar</label>
+          <input
+            type="file"
+            name="avatar"
+            onChange={handleAvatarChange}
+            className="w-full"
+          />
+          {formData.avatar && (
+            <img
+              src={formData.avatar}
+              alt="Avatar Preview"
+              className="w-20 h-20 mt-4 rounded-full"
+            />
+          )}
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded"
+        >
+          Update Profile
+        </button>
+      </form>
+      <div className="mt-6">
+        <h2 className="text-xl font-semibold">Updated User Information</h2>
+        <p>Username: {user.username}</p>
+        <p>Email: {user.email}</p>
+        <img
+          src={user.avatar}
+          alt="User Avatar"
+          className="w-20 h-20 mt-2 rounded-full"
         />
-        <Input
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={handleInputChange}
-          placeholder="Email"
-        />
-        <Input type="file" accept="image/*" onChange={handleAvatarChange} />
-        <Button type="submit">Update Profile</Button>
-      </Form>
-    </ProfileContainer>
+      </div>
+    </div>
   );
 };
 
