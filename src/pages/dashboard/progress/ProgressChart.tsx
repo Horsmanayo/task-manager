@@ -34,14 +34,14 @@ function ProgressChart() {
   };
 
   return (
-    <div className="bg-gray-900 p-5 rounded-lg shadow-md w-full max-w-[400px] mx-auto md:max-w-[600px] lg:max-w-[700px]">
+    <div className="bg-gray-900 p-2 rounded-lg shadow-md w-full max-w-[200px] mx-auto md:max-w-[300px] lg:max-w-[350px]">
       <h2 className="text-xl text-center font-semibold text-white">
         Task Completion Rate
       </h2>
 
-      <div className="text-white m-2">
+      <div className="text-white m-1">
         {/* Make the chart responsive by setting height and width to 100% */}
-        <div className="relative h-[200px] sm:h-[300px] md:h-[350px]">
+        <div className="relative h-[100px] sm:h-[150px] md:h-[175px]">
           <Doughnut data={data} options={options} />
         </div>
       </div>

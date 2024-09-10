@@ -19,8 +19,9 @@ const TaskDetail = ({
   instructorName,
   steps,
 }: TaskDetailProps) => {
+  
   return (
-    <div className="p-4 border rounded-md shadow-lg bg-white w-full  max-w-4xl mx-auto">
+    <div className="p-4 border rounded-md shadow-lg bg-white w-full  max-w-4xl mx-auto h-[130v]">
       {image && (
         <img
           src={image}

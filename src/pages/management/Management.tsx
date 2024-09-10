@@ -1,42 +1,50 @@
-import { useProjects } from "../../context/ProjectContext"; // Import useProjects hook from context for managing project data
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook for navigation
+import { RootState } from "../../app/store";
+import { useDispatch } from "react-redux";
+import { removeProject } from "../../features/management";
 
 const Management: React.FC = () => {
   // Destructure projects, updateProject, and deleteProject from the useProjects context
-  const { projects, updateProject, deleteProject } = useProjects();
-  // Initialize navigation hook
   const navigate = useNavigate();
+  const projects = useSelector((state: RootState) => state.management.projects);
 
   // Function to handle editing a project
   const handleEdit = (id: number) => {
     // Find the project to be edited by its ID
-    const project = projects.find(p => p.id === id);
+    const project = projects.find((p) => p.id === id);
     if (project) {
       // Prompt user for new name and description
       const updatedName = prompt("Edit project name:", project.name);
-      const updatedDescription = prompt("Edit project description:", project.description);
+      const updatedDescription = prompt(
+        "Edit project description:",
+        project.description
+      );
       if (updatedName && updatedDescription) {
         // Create a new project object with updated details
-        const updatedProject = { ...project, name: updatedName, description: updatedDescription };
+        const updatedProject = {
+          ...project,
+          name: updatedName,
+          description: updatedDescription,
+        };
         // Call updateProject to save the changes
-        updateProject(updatedProject);
+        // updateProject(updatedProject);
       }
     }
   };
-
+  const dispatch = useDispatch();
   // Function to handle deleting a project
   const handleDelete = (id: number) => {
     // Confirm with user before deleting
     if (window.confirm("Are you sure you want to delete this project?")) {
-      // Call deleteProject to remove the project
-      deleteProject(id);
+      dispatch(removeProject(id));
     }
   };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       {/* Title of the page */}
-      <h2 className="text-3xl font-bold mb-6">Task Management</h2>
+      <h2 className="text-3xl font-bold mb-6">Project Management</h2>
 
       {/* Button to navigate to the add project page */}
       <button
@@ -53,7 +61,7 @@ const Management: React.FC = () => {
           <div
             key={project.id}
             className="bg-white p-6 shadow-md rounded-lg w-full"
-            style={{ minHeight: '200px' }} // Ensure a decent height for the card
+            style={{ minHeight: "200px" }} // Ensure a decent height for the card
           >
             <div className="flex flex-col justify-between h-full">
               <div>
@@ -63,7 +71,8 @@ const Management: React.FC = () => {
                 <p className="mb-2">{project.description}</p>
                 {/* Display project status, priority, and due date */}
                 <p>
-                  Status: {project.status} | Priority: {project.priority} | Due: {project.duedate}
+                  Status: {project.status} | Priority: {project.priority} | Due:{" "}
+                  {project.dueDate}
                 </p>
               </div>
               <div className="flex justify-end space-x-2 mt-4">

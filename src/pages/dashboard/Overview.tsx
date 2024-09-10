@@ -12,20 +12,18 @@ const Overview = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row m-4 lg:m-8">
-  <div className="flex-[3] mb-4 lg:mb-0 lg:mr-8">
-    <div className="mb-4">
-      <Progress />
+    <div className="flex flex-col lg:flex-row w-full min-h-screen">
+      {/* Left side - Progress and Tasks */}
+      <div className="flex flex-col w-full lg:w-2/3 p-4">
+        <Progress />
+        <Tasks onTaskClick={handleTaskClick} />
+      </div>
+      
+      {/* Right side - Calendar and Task Details */}
+      <div className="w-full lg:w-1/3 p-4">
+        <RightSide task={selectedTask} />
+      </div>
     </div>
-    <div>
-      <Tasks onTaskClick={handleTaskClick} />
-    </div>
-  </div>
-  <div className="flex-[1] h-auto lg:h-[100vh]">
-    <RightSide task={selectedTask} />
-  </div>
-</div>
-
   );
 };
 

@@ -6,7 +6,7 @@ const Progress = () => {
   return (
     <div className="flex flex-col md:flex-row gap-6 md:gap-8">
       {/* ProgressChart container */}
-      <div className="mb-8 md:mb-20 w-full md:w-[60%]">
+      <div className="mb-8 md:mb-20 w md:w-[60%]">
         <ProgressChart />
       </div>
       
