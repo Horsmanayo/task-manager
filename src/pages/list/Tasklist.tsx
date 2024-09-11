@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { mockTasks, Task } from "../../data/taskData";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { Task } from "../../interface";
 
 const TaskList = () => {
   const [filterStatus, setFilterStatus] = useState<string>("");
   const [filterPriority, setFilterPriority] = useState<string>("");
 
-  const filteredTasks = mockTasks.filter((task) => {
+  const taskList = useSelector((state: RootState) => state.task.tasks);
+
+  const filteredTasks = taskList.filter((task) => {
     return (
       (filterStatus ? task.status === filterStatus : true) &&
       (filterPriority ? task.priority === filterPriority : true)

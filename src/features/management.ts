@@ -15,7 +15,6 @@ export const managementSlice = createSlice({
   initialState: initialState,
   reducers: {
     createProject: (state, action: PayloadAction<Project>) => {
-      console.log("action", action);
       state.projects.push(action.payload);
     },
     removeProject: (state, action: PayloadAction<number>) => {
