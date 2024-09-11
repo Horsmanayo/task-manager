@@ -7,7 +7,10 @@ import { removeProject } from "../../features/management";
 const Management: React.FC = () => {
   // Destructure projects, updateProject, and deleteProject from the useProjects context
   const navigate = useNavigate();
-  const projects = useSelector((state: RootState) => state.management.projects);
+  const projects = useSelector((state: RootState) => {
+    console.log("state", state);
+    return state.management.projects;
+  });
 
   // Function to handle editing a project
   const handleEdit = (id: number) => {
