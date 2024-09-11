@@ -1,77 +1,68 @@
-import { useState } from 'react'; // Import useState hook to manage state in functional component
-import styles from './TeamMembersScreen.module.css'; // Import CSS module for styling
-import teamMembers from '../data/teamMembers'; // Import initial data for team members
-import { TeamMember } from '../types/TeamMember'; // Import TeamMember type for TypeScript type checking
-import { toast, ToastContainer } from 'react-toastify'; // Import toast functions for notifications
-import 'react-toastify/dist/ReactToastify.css'; // Import default toast styles
+import { useState } from "react"; // Import useState hook to manage state in functional component
+import styles from "./TeamMembersScreen.module.css"; // Import CSS module for styling
+import teamMembers from "../data/teamMembers"; // Import initial data for team members
+import { TeamMember } from "../types/TeamMember"; // Import TeamMember type for TypeScript type checking
+import { toast, ToastContainer } from "react-toastify"; // Import toast functions for notifications
+import "react-toastify/dist/ReactToastify.css"; // Import default toast styles
+import { useSelector } from "react-redux";
+import { RootState } from "../app/store";
+import { useDispatch } from "react-redux";
+import { assignTask } from "../features/taskSlice";
 
 // TeamMembersScreen component
 const TeamMembersScreen: React.FC = () => {
   // State to store current list of members
-  const [members, setMembers] = useState<TeamMember[]>(teamMembers);
-  // State to store new member's name
-  const [newMember, setNewMember] = useState<string>('');
-  // State to store new member's role
-  const [newRole, setNewRole] = useState<string>('');
+  const [memberss, setMembers] = useState<TeamMember[]>(teamMembers);
+  const dispatch = useDispatch();
+  const members = useSelector(
+    (state: RootState) => state.teamMember.teamMembers
+  );
 
-  // List of predefined tasks that can be assigned to members
-  const tasks = [
-    'Design Database',
-    'Develop Homepage',
-    'Create Test Cases',
-    'Conduct Meeting',
-    'Implement Authentication',
-    'Optimize Performance',
-    'Fix Bugs',
-    'Deploy Application',
-    'Conduct Code Review',
-    'Write Documentation',
-    'Set Up CI/CD Pipeline',
-    'Design UI/UX',
-    'Develop API Endpoints',
-    'Perform User Testing',
-    'Create Data Backup Plan',
-    'Implement Logging and Monitoring',
-    'Handle Data Migration',
-    'Configure Environment Variables'
-  ];
+  console.log("members", members);
+
+  const tasks = useSelector((state: RootState) => state.task.tasks);
+  console.log("tasks", tasks);
+  // State to store new member's name
+  const [newMember, setNewMember] = useState<string>("");
+  const [newRole, setNewRole] = useState<string>("");
 
   // Function to add a new team member
   const addMember = () => {
-    if (newMember && newRole) { // Check if both name and role are provided
+    if (newMember && newRole) {
+      // Check if both name and role are provided
       const newMemberData: TeamMember = {
         id: members.length + 1, // Generate a new ID based on current length of members
         name: newMember, // Set new member's name
-        role: newRole // Set new member's role
+        role: newRole, // Set new member's role
       };
 
       // Update members state with the new member data
       setMembers([...members, newMemberData]);
-      
+
       // Display success notification
       toast.success(`You have added ${newMember} as a ${newRole}`, {
-        position: "top-right", 
-        autoClose: 3000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
 
       // Clear the input fields
-      setNewMember('');
-      setNewRole('');
+      setNewMember("");
+      setNewRole("");
     } else {
       // Display error notification if fields are missing
-      toast.error('Please enter both name and role for the new member.', {
-        position: "top-right", 
+      toast.error("Please enter both name and role for the new member.", {
+        position: "top-right",
         autoClose: 3000,
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
   };
@@ -84,21 +75,24 @@ const TeamMembersScreen: React.FC = () => {
   };
 
   // Function to assign a task to a member
-  const assignTask = (memberId: number, task: string) => {
+  const handleAssignTask = (memberId: number, task: string) => {
     // Find the member by their ID
-    const member = members.find(m => m.id === memberId);
+    const member = members.find((m) => m.id === memberId);
     if (member) {
+      assignTask(Number(task), memberId);
       // Display a notification showing which member has been assigned which task
       toast.success(`You have assigned ${member.name} the task to ${task}`, {
-        position: "top-right", 
-        autoClose: 3000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
+    console.log("task", tasks);
+    console.log("members", members);
   };
 
   // JSX for the component's UI
@@ -112,16 +106,25 @@ const TeamMembersScreen: React.FC = () => {
             {member.name} - {member.role}
             <div className={styles.memberActions}>
               {/* Dropdown to assign tasks */}
-              <select className={styles.taskSelect} onChange={(e) => assignTask(member.id, e.target.value)} aria-label="Assign Task">
+              <select
+                className={styles.taskSelect}
+                onChange={(e) => handleAssignTask(member.id, e.target.value)}
+                aria-label="Assign Task"
+              >
                 <option>Assign Task</option>
                 {tasks.map((task, index) => (
-                  <option key={index} value={task}>
-                    {task}
+                  <option key={index} value={task.id}>
+                    {task.name}
                   </option>
                 ))}
               </select>
               {/* Button to remove a member */}
-              <button className={styles.removeButton} onClick={() => removeMember(member.id)}>Remove</button>
+              <button
+                className={styles.removeButton}
+                onClick={() => removeMember(member.id)}
+              >
+                Remove
+              </button>
             </div>
           </li>
         ))}
@@ -144,7 +147,9 @@ const TeamMembersScreen: React.FC = () => {
         className={styles.customInput}
       />
       {/* Button to add the new member */}
-      <button className={styles.addButton} onClick={addMember}>Add Member</button>
+      <button className={styles.addButton} onClick={addMember}>
+        Add Member
+      </button>
 
       {/* ToastContainer to display notifications */}
       <ToastContainer />

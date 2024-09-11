@@ -15,12 +15,17 @@ const TaskCard = ({
   deadline,
   onClick,
 }: TaskCardProps) => {
-
   return (
-    // onClick function to select the task.
-    <div onClick={onClick} className="p-4 border rounded-md shadow-sm bg-white h-auto space-y-6 w-[320px] cursor-pointer">
+    <div
+      onClick={onClick}
+      className="p-4 border rounded-md shadow-sm bg-white h-auto space-y-4 cursor-pointer w-full sm:w-[280px] md:w-[290px] transition-transform transform hover:scale-105"
+    >
       {/* Image */}
-      <img src={image} alt="Task Image" className="w-[300px] h-[30vh]" />
+      <img
+        src={image}
+        alt="Task Image"
+        className="w-full h-[25vh] sm:h-[30vh] object-cover rounded"
+      />
 
       <h3 className="text-lg font-semibold">{taskName}</h3>
 
@@ -32,10 +37,13 @@ const TaskCard = ({
           <span>{deadline}</span>
         </div>
       </div>
-      
+
       <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
         {/* Progress bar */}
-        <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${progress}%` }}></div>
+        <div
+          className="bg-blue-600 h-2.5 rounded-full"
+          style={{ width: `${progress}%` }}
+        ></div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 const PreviewTask = () => {
   return (
-    <div className="">
+    <div className=" w-[70%]">
       <div>
         <iframe
           width="560"
@@ -36,15 +36,15 @@ const PreviewTask = () => {
         </div>
       </div>
       <div>
-        <h1 className="font-semibold text-xl mb-1 ml-1">Description</h1>
-        <p className="ml-1 mb-2">
+        <h1 className="font-semibold text-xl mb-2 ml-1">Description</h1>
+        <p className="ml-1 mb-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
           eius blanditiis a quos animi, sequi neque aperiam illum reiciendis
           harum repellat asperiores minima.
         </p>
       </div>
       <div>
-        <h1 className="font-semibold text-xl mb-2 ml-1">
+        <h1 className="font-semibold text-xl mb-4 ml-1">
           Essence Of Assessment
         </h1>
         <div className="ml-1">

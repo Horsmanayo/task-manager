@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { IoChatbubbleOutline } from "react-icons/io5";
-
+import { BsChatLeftText } from "react-icons/bs";
 import {
   FiBookOpen,
   FiGrid,
@@ -10,14 +10,34 @@ import {
   FiSettings,
   FiHelpCircle,
   FiActivity,
+  FiMenu,
 } from "react-icons/fi";
 
 const Sidebar = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <>
+      {/* Hamburger menu for mobile view */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={toggleSidebar}
+          className="text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600"
+        >
+          <FiMenu className="text-2xl" />
+        </button>
+      </div>
+
+      {/* Sidebar */}
       <div
         id="container"
-        className="h-[100vh] bg-gray-50 w-64 flex flex-col justify-between shadow-lg fixed"
+        className={`h-[100vh] bg-gray-50 w-64 flex flex-col justify-between shadow-lg fixed transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 md:flex`}
       >
         {/* logo and navigation */}
         <div className="p-5">
@@ -118,7 +138,7 @@ const Sidebar = () => {
             </NavLink>
 
             <NavLink
-              to="/settings"
+              to="/dashboard/settings"
               className={({ isActive }) =>
                 `flex items-center space-x-2 p-2 rounded-md ${
                   isActive
@@ -130,6 +150,7 @@ const Sidebar = () => {
               <FiSettings className="text-lg" />
               <span>Settings</span>
             </NavLink>
+
             <NavLink
               to="/dashboard/chat"
               className={({ isActive }) =>
@@ -140,8 +161,8 @@ const Sidebar = () => {
                 }`
               }
             >
-              <IoChatbubbleOutline className="text-lg" />
-              <span>chat</span>
+              <BsChatLeftText className="text-lg" />
+              <span>Chat</span>
             </NavLink>
           </nav>
         </div>
@@ -165,6 +186,16 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
+
+      {/* Overlay for mobile sidebar */}
+      {isSidebarOpen && (
+        <div
+          onClick={toggleSidebar}
+          className="fixed inset-0 bg-black opacity-50 z-40 md:hidden"
+        ></div>
+      )}
+
+      {/* Placeholder for spacing next to sidebar */}
       <div className="w-64"></div>
     </>
   );

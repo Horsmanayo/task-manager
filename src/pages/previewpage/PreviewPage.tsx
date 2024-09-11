@@ -6,7 +6,7 @@ const PreviewPage = () => {
   return (
     <div className="max-w-[calc(100vw-256px)]">
       <Header />
-      <div className="flex p-6">
+      <div className="flex gap-10 justify-between p-6">
         <PreviewTask />
         <Tasks />
       </div>
