@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { useDispatch } from "react-redux";
 import { assignTask } from "../features/taskSlice";
+import { updateMemberTask } from "../features/teamMemberSlice";
 
 // TeamMembersScreen component
 const TeamMembersScreen: React.FC = () => {
@@ -15,13 +16,13 @@ const TeamMembersScreen: React.FC = () => {
   const [memberss, setMembers] = useState<TeamMember[]>(teamMembers);
   const dispatch = useDispatch();
   const members = useSelector(
-    (state: RootState) => state.teamMember.teamMembers
+    (state: RootState) => state.teamMembers.teamMembers
   );
 
   console.log("members", members);
 
   const tasks = useSelector((state: RootState) => state.task.tasks);
-  console.log("tasks", tasks);
+
   // State to store new member's name
   const [newMember, setNewMember] = useState<string>("");
   const [newRole, setNewRole] = useState<string>("");
@@ -78,8 +79,12 @@ const TeamMembersScreen: React.FC = () => {
   const handleAssignTask = (memberId: number, task: string) => {
     // Find the member by their ID
     const member = members.find((m) => m.id === memberId);
-    if (member) {
-      assignTask(Number(task), memberId);
+    const newTask = tasks.find((t) => t.id === +task);
+
+    if (member && newTask) {
+      console.log("im here");
+      dispatch(assignTask({ taskId: newTask.id, memberId: member.id }));
+      dispatch(updateMemberTask({ id: member.id, task: newTask }));
       // Display a notification showing which member has been assigned which task
       toast.success(`You have assigned ${member.name} the task to ${task}`, {
         position: "top-right",
@@ -92,7 +97,7 @@ const TeamMembersScreen: React.FC = () => {
       });
     }
     console.log("task", tasks);
-    console.log("members", members);
+    console.log("member", members);
   };
 
   // JSX for the component's UI

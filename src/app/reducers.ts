@@ -6,7 +6,7 @@ import teamMembersReducer from "../features/teamMemberSlice";
 const rootReducer = combineReducers({
   management: managementReducer,
   task: taskReducer,
-  teamMember: teamMembersReducer,
+  teamMembers: teamMembersReducer,
 });
 
 export default rootReducer;
