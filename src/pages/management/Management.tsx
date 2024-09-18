@@ -30,6 +30,7 @@ const Management: React.FC = () => {
           name: updatedName,
           description: updatedDescription,
         };
+        console.log("updatedProject", updatedProject);
         // Call updateProject to save the changes
         // updateProject(updatedProject);
       }
