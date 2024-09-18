@@ -92,7 +92,7 @@ const Settings: React.FC = () => {
         <p>Username: {user.username}</p>
         <p>Email: {user.email}</p>
         <img
-          src={user.avatar}
+          src={user.avatar ?? ""}
           alt="User Avatar"
           className="w-20 h-20 mt-2 rounded-full"
         />

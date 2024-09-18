@@ -13,7 +13,7 @@ import { updateMemberTask } from "../features/teamMemberSlice";
 // TeamMembersScreen component
 const TeamMembersScreen: React.FC = () => {
   // State to store current list of members
-  const [memberss, setMembers] = useState<TeamMember[]>(teamMembers);
+  const [_, setMembers] = useState<TeamMember[]>(teamMembers);
   const dispatch = useDispatch();
   const members = useSelector(
     (state: RootState) => state.teamMembers.teamMembers
