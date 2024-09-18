@@ -41,10 +41,33 @@ export const teamMembersSlice = createSlice({
         state.teamMembers[index] = action.payload;
       }
     },
+    updateMemberTask: (state, action) => {
+      const index = state.teamMembers.findIndex(
+        (member) => member.id === action.payload.id
+      );
+      if (index !== -1 && state.teamMembers[index].tasks) {
+        state.teamMembers = state.teamMembers.map((member, i) =>
+          i === index
+            ? {
+                ...member,
+                tasks: member.tasks?.map((task) =>
+                  task.id === action.payload.task.id
+                    ? { ...task, ...action.payload.task }
+                    : task
+                ),
+              }
+            : member
+        );
+      }
+    },
   },
 });
 
-export const { createTeamMember, removeMember, updateMember } =
-  teamMembersSlice.actions;
+export const {
+  createTeamMember,
+  removeMember,
+  updateMember,
+  updateMemberTask,
+} = teamMembersSlice.actions;
 
 export default teamMembersSlice.reducer;

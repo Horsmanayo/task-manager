@@ -1,8 +1,7 @@
 // Import the required dependencies
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Task, TeamMember } from "../interface";
-import { updateMember } from "./teamMemberSlice";
+import { Task } from "../interface";
 
 export interface TaskState {
   tasks: Task[];
@@ -17,6 +16,7 @@ const initialState: TaskState = {
       priority: "high",
       description: "Finalize the homepage design for the new project.",
       dueDate: "2024-09-15",
+      memberId: null,
     },
     {
       id: 2,
@@ -130,33 +130,26 @@ export const taskSlice = createSlice({
         state.tasks[index] = action.payload;
       }
     },
+    assignTask: (
+      state,
+      action: PayloadAction<{ taskId: number; memberId: number }>
+    ) => {
+      const taskIndex = state.tasks.findIndex(
+        (task) => task.id === action.payload.taskId
+      );
+
+      if (taskIndex !== -1) {
+        // Create a new task array and update the specific task
+        state.tasks = state.tasks.map((task, index) =>
+          index === taskIndex
+            ? { ...task, memberId: action.payload.memberId } // Update the task with new memberId
+            : task
+        );
+      }
+    },
   },
 });
-
-export const { createTask, removeTask, updateTask } = taskSlice.actions;
-
-// Thunk for assigning task
-import { Dispatch } from "redux";
-
-export const assignTask =
-  (taskId: number, memberId: number) => (dispatch: Dispatch, getState: any) => {
-    const { teamMembers } = getState().teamMember;
-    const { tasks } = getState().task;
-
-    const task = tasks.find((t: Task) => t.id === taskId);
-    const member = teamMembers.find((m: TeamMember) => m.id === memberId);
-
-    if (task && member) {
-      const updatedTask = { ...task, memberId: member.id };
-      const updatedMember = {
-        ...member,
-        tasks: [...(member.tasks || []), updatedTask],
-      };
-
-      // Dispatch updates
-      dispatch(updateTask(updatedTask)); // Update task in the task slice
-      dispatch(updateMember(updatedMember)); // Update member in the teamMember slice
-    }
-  };
+export const { createTask, removeTask, updateTask, assignTask } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;

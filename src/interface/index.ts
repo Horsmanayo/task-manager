@@ -16,7 +16,7 @@ export interface Task {
   description: string;
   dueDate: string;
   createdAt?: string;
-  memberId?: number;
+  memberId?: number | null;
 }
 
 export interface TeamMember {
