@@ -1,6 +1,6 @@
 import { useState } from "react"; // Import useState hook for managing component state
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook for navigation
-import { useProjects } from "../../context/ProjectContext"; // Import useProjects hook from context for managing project data
+// Import useProjects hook from context for managing project data
 import { useDispatch } from "react-redux";
 import { createProject } from "../../features/management";
 
@@ -8,7 +8,7 @@ const AddProject: React.FC = () => {
   // Initialize navigation hook
   const navigate = useNavigate();
   // Destructure addProject function from the useProjects context
-  const { addProject } = useProjects();
+  // const { addProject } = useProjects();
   const dispatch = useDispatch();
 
   // State to manage the new project's details

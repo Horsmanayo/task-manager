@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { notifications as mockNotifications } from "../../utils/notificationData";
 
 // Define the notification interface to specify the structure
